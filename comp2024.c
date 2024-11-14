@@ -53,7 +53,7 @@ void writer(Data d)
                         break;
                 case TSTR:
                         // printf("(STR, '%s')\n", d.sval);
-                        printf("'%s'", d.sval);
+                        printf("%s", d.sval);
 
                         free(d.sval);
 
@@ -65,11 +65,9 @@ void writer(Data d)
                 case TDUO:
                         print_list(d);
 
-                        free_list(d);
-
                         break;
                 case TERR:
-                        printf("syntax error");
+                        printf("syntax error\n");
 
                         break;
         }
@@ -93,10 +91,7 @@ void free_list(Data l)
         if(l.tag != TDUO)
                 return;
         
-        if(l.pval->d[0].tag == TDUO)
-                free_list(l.pval->d[0]);
-        else if(l.pval->d[1].tag == TDUO)
-                free_list(l.pval->d[1]);
+        free_list(l.pval->d[1]);
 
         free(l.pval);
 }

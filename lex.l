@@ -15,6 +15,7 @@ comment ;.*\n
 string  \".*\"
 operator        [\+\-\/\*]
 end     \0
+else    .
 %%
 {iliteral} {
         return ILITERAL;
@@ -29,10 +30,10 @@ end     \0
         return LIST_E;
 }
 {whitespace} {
-        /* Do Nothing */
+        /* do nothing */
 }
 {comment} {
-        /* Do Nothing */
+        /* do nothing */
 }
 {string} {
         return STRING;
@@ -42,6 +43,9 @@ end     \0
 }
 {end} {
         return 0;
+}
+{else} {
+        /* do nothing */
 }
 %%
 int yywrap()

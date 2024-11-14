@@ -2,7 +2,7 @@
 
 void rec_des_parser(void)
 {
-        for(int lex = yylex(); !lex; lex = yylex()) {
+        for(int lex = yylex(); lex; lex = yylex()) {
                 switch(lex) {
                         case ILITERAL:
                                 g_data = mkint(atoi(yytext));
@@ -27,6 +27,10 @@ void rec_des_parser(void)
                 }
 
                 writer(g_data);
+                printf("\n");
+
+                if(g_data.tag == TDUO)
+                        free_list(g_data);
         }
 }
 
